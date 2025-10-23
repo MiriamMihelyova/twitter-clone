@@ -37,6 +37,13 @@ type Story = StoryObj<typeof ProfilePreview>;
 
 export const Default: Story = {};
 
+export const NoConnectButton: Story = {
+  args: {
+    displayedUser: createMockUser(),
+    meId: '1',
+  },
+};
+
 export const LongText: Story = {
   args: {
     displayedUser: createMockUser({

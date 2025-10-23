@@ -41,15 +41,15 @@ export function ProfilePreview(props: ProfilePreviewProps) {
       <ProfileDetailsWrapper>
         <NameWrapper>
           <NameLink onClick={handleAvatarClick}>{name}</NameLink>
-          <Handle>{uniqueName}</Handle>
+          <UniqueName>{uniqueName}</UniqueName>
         </NameWrapper>
         <Bio>{bio}</Bio>
         <Stats>
           <div>
-            <Count>{followingCount}</Count> <Label>Following</Label>
+            <StatsCount>{followingCount}</StatsCount> <StatsLabel>Following</StatsLabel>
           </div>
           <div>
-            <Count>{followersCount}</Count> <Label>Followers</Label>
+            <StatsCount>{followersCount}</StatsCount> <StatsLabel>Followers</StatsLabel>
           </div>
         </Stats>
 
@@ -80,28 +80,21 @@ const Header = styled.div`
   justify-content: space-between;
 `;
 
-const ProfileImage = styled.div<{ $backgroundImage: string }>(
-  ({ theme, $backgroundImage }) =>
-    css`
-      border-radius: 100%;
-      width: 64px;
-      height: 64px;
-      background-color: ${theme.colors.royalBlue};
-      margin-right: ${theme.spacing[0.75]};
-
-      ${$backgroundImage
-        ? `
-      background-image: url(${$backgroundImage});
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-color: ${theme.colors.royalBlue};
-    `
-        : ''}
-    `,
+const ProfileImage = styled.div<{ $backgroundImage?: string }>(
+  ({ theme, $backgroundImage }) => css`
+    border-radius: 100%;
+    width: 64px;
+    height: 64px;
+    margin-right: ${theme.spacing[0.75]};
+    background-color: ${theme.colors.royalBlue};
+    background-image: ${$backgroundImage ? `url(${$backgroundImage})` : 'none'};
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  `,
 );
 
-const Handle = styled.div(
+const UniqueName = styled.div(
   ({ theme }) => css`
     color: ${theme.colors.gray};
     font-size: ${theme.typography.fontSizes.base};
@@ -130,14 +123,14 @@ const Stats = styled.div(
   `,
 );
 
-const Count = styled.span(
+const StatsCount = styled.span(
   ({ theme }) => css`
     color: ${theme.colors.white};
     font-weight: ${theme.typography.fontWeight.bold};
   `,
 );
 
-const Label = styled.span(
+const StatsLabel = styled.span(
   ({ theme }) => css`
     color: ${theme.colors.gray};
   `,

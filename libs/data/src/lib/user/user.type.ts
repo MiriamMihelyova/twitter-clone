@@ -48,7 +48,7 @@ export class UserWithFollowingStatus extends UserBase {
 
 export class SocialBase implements Social {
   @AutoMap()
-  id: string;
+  id: number;
 
   @AutoMap()
   userId: string;

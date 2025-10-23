@@ -38,17 +38,6 @@ export const SingleUser = (props: SingleUserProps) => {
     hideOnClick: false,
   };
 
-  const userPreviewContent = showUserPreview && (
-    <div onClick={(e) => e.stopPropagation()}>
-      <ProfilePreview
-        displayedUser={buttonRelatedUser}
-        meId={meId}
-        publicUserId={publicUserId}
-        invData={invData}
-      />
-    </div>
-  );
-
   const goToUserPage = () => {
     if (meId === id) {
       return navigate(linksRecords.profilePage.base);
