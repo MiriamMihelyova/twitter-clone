@@ -1,3 +1,5 @@
+//apps/client/src/router/pages.ts
+
 import { linksRecords } from '@tw/ui/common';
 import { HomePage } from '../pages/HomePage';
 import { LandingPage } from '../pages/LandingPage';
@@ -12,7 +14,7 @@ import { AccessRole } from './accessRole.type';
 
 export type Page = {
   path: string;
-  Component: () => JSX.Element;
+  Component: React.ComponentType;
   accessRole: AccessRole;
 };
 
