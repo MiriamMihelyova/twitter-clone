@@ -9,4 +9,11 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/client',
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
+
+  coverageReporters: ['text', 'lcov'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx,js,jsx}',
+    '!src/**/*.spec.{ts,tsx,js,jsx}',
+    '!src/**/index.{ts,tsx}',
+  ],
 };
