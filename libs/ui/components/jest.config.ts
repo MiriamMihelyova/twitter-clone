@@ -9,6 +9,8 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/ui/components',
   setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
+
+  coverageReporters: ['text', 'lcov'],
   moduleNameMapper: {
     '^@tw/test-utils$': '<rootDir>/test-utils.tsx',
   },
