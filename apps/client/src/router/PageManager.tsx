@@ -1,6 +1,7 @@
+//PageManager
+
 import { Loader } from '@tw/ui/components';
 import { useAuthQuery } from '@tw/ui/data-access';
-import { useMemo } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AccessRole } from './accessRole.type';
 
@@ -9,25 +10,34 @@ type PageManagerProps = {
   accessRole: AccessRole;
 };
 
-export const PageManager = (props: PageManagerProps) => {
-  const { children, accessRole } = props;
-
+export const PageManager = ({ children, accessRole }: PageManagerProps) => {
   const auth = useAuthQuery();
 
-  const publicAccess = accessRole === AccessRole.Public;
-  const privateAccess = accessRole === AccessRole.Private;
-  const isAuth = useMemo(() => !!auth.data?.id, [auth]);
+  const isAuth = !!auth.data?.id;
+  const isLoading = auth.isFetching && !auth.data;
 
-  const PageComponent = () => {
-    return auth.isFetching && !auth.data ? <Loader fullScreen /> : children;
-  };
+  if (isLoading) {
+    return <Loader fullScreen />;
+  }
 
   if (!isAuth) {
-    if (publicAccess) return <PageComponent />;
-    if (privateAccess) return <Navigate to={'/'} />;
+    if (accessRole === AccessRole.Public) {
+      return children;
+    }
+    if (accessRole === AccessRole.Private) {
+      return <Navigate to="/" />;
+    }
   }
+
+  // 3) ak som prihlásená
   if (isAuth) {
-    if (privateAccess) return <PageComponent />;
-    if (publicAccess) return <Navigate to={'/home'} />;
+    if (accessRole === AccessRole.Private) {
+      return children;
+    }
+    if (accessRole === AccessRole.Public) {
+      return <Navigate to="/home" />;
+    }
   }
+
+  return null;
 };
